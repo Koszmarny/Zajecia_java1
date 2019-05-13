@@ -42,7 +42,7 @@ public class Vector {
     }
 
     public double length() {
-        return this.components.length;
+        return this.dimension;
     }
 
     public Vector add(Vector v) {
@@ -75,9 +75,8 @@ public class Vector {
     }
 
     public Vector scalarMultiplication(double factor) {
-        Vector result = new Vector(this);
-        result = result.rescale(factor);
-        return result;
+
+        return Vectors.scalarMultiplication(this,factor);
     }
 
     public double angle(Vector v) {
