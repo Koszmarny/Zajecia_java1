@@ -1,6 +1,6 @@
 public class Vectors extends Vector {
     ////prywatne konstruktory
-    static Vector sum(Vector v1, Vector v2) {
+    public static Vector sum(Vector v1, Vector v2) {
 //        Vector v = new Vector(v1);
         /*
         for (int i = 0; i < v1.size(); i++) {
@@ -9,7 +9,7 @@ public class Vectors extends Vector {
         return v1.sum(v2);
     }
 
-    static Vector difference(Vector v1, Vector v2) {
+    public static Vector difference(Vector v1, Vector v2) {
 /*        Vector v = new Vector();
         for (int i = 0; i < v1.size(); i++) {
             double dif = v1.getComponent(i) - v2.getComponent(i);
@@ -18,7 +18,7 @@ public class Vectors extends Vector {
         return v1.difference(v2);
     }
 
-    static Vector scalarMultiplication;
+    public static Vector scalarMultiplication;
 
     ///////?????
     ///////statyczne metody ????
