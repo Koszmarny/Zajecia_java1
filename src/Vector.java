@@ -53,7 +53,8 @@ public class Vector {
     }
 
     public Vector sum(Vector v) {
-        return Vectors.sum(this, v);
+        Vector vec = new Vector(this);
+        return vec.add(v);
     }
 
     public Vector subtract(Vector v) {
@@ -64,7 +65,8 @@ public class Vector {
     }
 
     public Vector difference(Vector v) {
-        return Vectors.difference(this, v);
+        Vector vec = new Vector(this);
+        return vec.subtract(v);
     }
 
     public Vector rescale(double factor) {
@@ -75,8 +77,8 @@ public class Vector {
     }
 
     public Vector scalarMultiplication(double factor) {
-
-        return Vectors.scalarMultiplication(this,factor);
+        Vector vec = new Vector(this);
+        return vec.rescale(factor);
     }
 
     public double angle(Vector v) {
