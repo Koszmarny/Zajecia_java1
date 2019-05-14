@@ -10,7 +10,7 @@ public class Vector {
     }
 
     public Vector(double[] vectorComponents) {
-        this.components = vectorComponents;
+        this.components = Arrays.copyOf(vectorComponents, vectorComponents.length);
         this.dimension = components.length;
     }
 
@@ -42,7 +42,7 @@ public class Vector {
     }
 
     public double length() {
-        return this.dimension;
+        return Math.sqrt(this.dotProduct(this));
     }
 
     public Vector add(Vector v) {
@@ -82,16 +82,8 @@ public class Vector {
     }
 
     public double angle(Vector v) {
-        return Math.acos(this.scalarProduct(v) / (this.length() * v.length()));
+        return Math.acos((this.dotProduct(v)) / (this.length() * v.length()));
     }
-
-    public double size() {
-        return this.dimension;
-    }
-
-/*    Vector vectorProduct(Vector v) {
-        for (int i = 0; )
-    }*/
 
     public double dotProduct(Vector v) {
         if (v.dimension == this.dimension) {

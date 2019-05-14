@@ -3,9 +3,9 @@ import java.util.Arrays;
 public class Polynomial {
 
     //POLA
-    public Polynomial ZERO;
-    public Polynomial ONE;
-    public Polynomial X;
+    public static final Polynomial ZERO = new Polynomial(new double[]{0});
+    public static final Polynomial ONE = new Polynomial(new double[]{1});
+    public static final Polynomial X = new Polynomial(new double[]{0, 1});
     protected double[] coefficients;
     protected int degree;
 
