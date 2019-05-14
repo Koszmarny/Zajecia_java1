@@ -25,43 +25,43 @@ public class Polynomial {
     }
 
     //METODY
-    Polynomial longer(Polynomial polynomial) {              // zwraca wielomian MNIEJSZEGO stopnia
+    private Polynomial longer(Polynomial polynomial) {              // zwraca wielomian MNIEJSZEGO stopnia
         if (this.degree < polynomial.degree) {
             return this;
         } else return polynomial;
     }
 
-    Polynomial createNormedMonomial(int degree) {
+    public Polynomial createNormedMonomial(int degree) {
         return this;
     }
 
-    Polynomial add(Polynomial polynomial) {
+    public Polynomial add(Polynomial polynomial) {
         for (int i = this.longer(polynomial).degree; i > 0; i++) {
             this.coefficients[i] += polynomial.coefficients[i];
         }
         return this;
     }
 
-    Polynomial subtract(Polynomial polynomial) {
+    public Polynomial subtract(Polynomial polynomial) {
         for (int i = this.longer(polynomial).degree; i > 0; i++) {
             this.coefficients[i] -= polynomial.coefficients[i];
         }
         return this;
     }
 
-    Polynomial multiply(Polynomial polynomial) {
+    public Polynomial multiply(Polynomial polynomial) {
         return this;
     }
 
-    Polynomial divide(Polynomial polynomial) {
+    public Polynomial divide(Polynomial polynomial) {
         return this;
     }
 
-    Polynomial mod(Polynomial polynomial) {
+    public Polynomial mod(Polynomial polynomial) {
         return this;
     }
 
-    Polynomial getDerivative() {
+    public Polynomial getDerivative() {
         Polynomial pol = new Polynomial();
         int degree = this.degree - 1;
         for (int i = 0; i < this.degree; i++) {
@@ -71,7 +71,7 @@ public class Polynomial {
         return pol;
     }
 
-    double valueAt(double x) {
+    public double valueAt(double x) {
         int degree = this.degree;
         double result = 0;
         for (int i = 0; i < this.degree; i++) {
@@ -81,23 +81,23 @@ public class Polynomial {
         return result;
     }
 
-    boolean isZeroPolynomial() {
+    public boolean isZeroPolynomial() {
         return this.equals(ZERO);
     }
 
-    boolean isConstantPolynomial() {
+    public boolean isConstantPolynomial() {
         return this.equals(ONE);
     }
 
-    boolean equals(Polynomial polynomial) {
+    public boolean equals(Polynomial polynomial) {
         return Arrays.equals(this.coefficients, polynomial.coefficients);
     }
 
-    int getDegree() {
+    public int getDegree() {
         return this.degree;
     }
 
-    double[] toArray() {
+    public double[] toArray() {
         return Arrays.copyOf(this.coefficients, this.degree);
     }
 
