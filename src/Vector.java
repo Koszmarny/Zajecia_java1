@@ -20,7 +20,7 @@ public class Vector {
     }
 
     public Vector(Vector v) {
-        components = v.components;
+        components = Arrays.copyOf(v.components, v.dimension);
         dimension = v.dimension;
     }
 
@@ -86,20 +86,13 @@ public class Vector {
     }
 
     public double dotProduct(Vector v) {
-        if (v.dimension == this.dimension) {
-            double S = 0;
-            for (int i = 0; i < this.dimension; i++) {
-                S += (this.components[i] * v.components[i]);
-            }
-            return S;
-        }
-        return 0;
+        return this.scalarProduct(v);
     }
 
     public double scalarProduct(Vector v) {
         double prod = 0;
         for (int i = 0; i < this.dimension; i++) {
-            prod += this.components[i] *= v.components[i];
+            prod += this.components[i] * v.components[i];
         }
         return prod;
     }
