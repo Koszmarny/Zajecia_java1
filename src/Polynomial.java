@@ -11,13 +11,12 @@ public class Polynomial {
 
     //KONSTRUKTORY
     public Polynomial(double[] coefficients) {
-        this.coefficients = coefficients;
-        this.degree = coefficients.length + 1;
+        this.coefficients = Arrays.copyOf(coefficients, coefficients.length);
+        this.degree = coefficients.length;
     }
 
-
     public Polynomial(Polynomial polynomial) {
-        coefficients = polynomial.coefficients;
+        coefficients = Arrays.copyOf(polynomial.coefficients, polynomial.degree);
         degree = polynomial.degree;
     }
 
@@ -25,7 +24,7 @@ public class Polynomial {
     }
 
     //METODY
-    private Polynomial longer(Polynomial polynomial) {              // zwraca wielomian MNIEJSZEGO stopnia
+    private Polynomial shorter(Polynomial polynomial) {              // zwraca wielomian MNIEJSZEGO stopnia
         if (this.degree < polynomial.degree) {
             return this;
         } else return polynomial;
@@ -36,28 +35,37 @@ public class Polynomial {
     }
 
     public Polynomial add(Polynomial polynomial) {
-        for (int i = this.longer(polynomial).degree; i > 0; i++) {
+        for (int i = this.shorter(polynomial).degree; i > 0; i++) {
             this.coefficients[i] += polynomial.coefficients[i];
         }
         return this;
     }
 
     public Polynomial subtract(Polynomial polynomial) {
-        for (int i = this.longer(polynomial).degree; i > 0; i++) {
+        for (int i = this.shorter(polynomial).degree; i > 0; i++) {
             this.coefficients[i] -= polynomial.coefficients[i];
         }
         return this;
     }
 
     public Polynomial multiply(Polynomial polynomial) {
+        for (int i = this.shorter(polynomial).degree; i > 0; i++) {
+            this.coefficients[i] *= polynomial.coefficients[i];
+        }
         return this;
     }
 
     public Polynomial divide(Polynomial polynomial) {
+        for (int i = this.shorter(polynomial).degree; i > 0; i++) {
+            this.coefficients[i] /= polynomial.coefficients[i];
+        }
         return this;
     }
 
     public Polynomial mod(Polynomial polynomial) {
+        for (int i = this.shorter(polynomial).degree; i > 0; i++) {
+            this.coefficients[i] %= polynomial.coefficients[i];
+        }
         return this;
     }
 
@@ -86,7 +94,7 @@ public class Polynomial {
     }
 
     public boolean isConstantPolynomial() {
-        return this.equals(ONE);
+        return this.equals(X);
     }
 
     public boolean equals(Polynomial polynomial) {

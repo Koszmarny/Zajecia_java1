@@ -6,7 +6,10 @@ public class Matrix {
     protected int numberOfColumns;
 
     public Matrix(double[][] elements) {
-        this.elements = elements;
+        this.numberOfRows = 1;
+        this.numberOfColumns =1;
+        this.elements[i][j] = elements[i][j];
+
     }
 
     public Matrix(Vector[] rows) {
@@ -21,14 +24,8 @@ public class Matrix {
     public Matrix(){}
 
     public Matrix createZeroMatrix(int rows, int columns){
-        double[][] M = new double[rows][columns];
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                M[i][j] = 0;
-            }
-        }
-        Matrix m = new Matrix(M);
-        return m;
+        double[][] elements = new double[rows][columns];
+        return new Matrix(elements);
     }
 
     public Matrix add(Matrix matrix){
@@ -63,7 +60,7 @@ public class Matrix {
     }
 
     public boolean isZeroMatrix(){
-        return true;
+        return Arrays.equals(this.elements,createZeroMatrix(this.numberOfRows,this.numberOfColumns).elements);
     }
 
     public boolean equals(Matrix matrix){
@@ -72,15 +69,15 @@ public class Matrix {
 
 
     public int getNumberOfRows(){
-        return 0;
+        return this.numberOfRows;
     }
 
     public int getNumberOfColumns(){
-        return 0;
+        return this.numberOfColumns;
     }
 
     public double getElement(int rowIndex, int columnIndex){
-        return 0;
+        return this.elements[rowIndex][columnIndex];
     }
 
     public double getMaxAbsElement(){
