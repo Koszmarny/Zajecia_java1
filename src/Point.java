@@ -90,6 +90,6 @@ public class Point {
     }
 
     public String toString() {
-        return Arrays.toString();
+        return "a";
     }
 }
