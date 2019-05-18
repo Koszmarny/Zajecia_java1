@@ -8,6 +8,8 @@ public class Matrix {
     public Matrix(double[][] elements) {
         this.numberOfRows = 1;
         this.numberOfColumns =1;
+        int i;
+        int j;
         this.elements[i][j] = elements[i][j];
 
     }
