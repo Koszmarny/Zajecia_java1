@@ -3,49 +3,65 @@ public class Fraction {
     private double denominator;
 
     //KONSTRUKTORY
-    public Fraction(double numerator, double denominator){
+    public Fraction(double numerator, double denominator) {
         this.numerator = numerator;
         this.denominator = denominator;
     }
 
-    public Fraction(Fraction fraction){
+    public Fraction(Fraction fraction) {
         numerator = fraction.numerator;
         denominator = fraction.denominator;
     }
 
-    public Fraction(int integer){
+    public Fraction(int integer) {
         numerator = integer;
         denominator = 1;
     }
 
     //METODY
-    public Fraction add(Fraction fraction){
+    public Fraction add(Fraction fraction) {
 
     }
 
-    public Fraction subtract(Fraction fraction){
+    public Fraction subtract(Fraction fraction) {
 
     }
 
-    public Fraction multiply(Fraction fraction){
+    public Fraction multiply(Fraction fraction) {
+        this.numerator *= fraction.numerator;
+        this.denominator *= fraction.denominator;
+        return this;
+    }
+
+    public Fraction divide(Fraction fraction) {
+        this.numerator *= fraction.denominator;
+        this.denominator *= fraction.numerator;
+        return this;
+    }
+
+    public Fraction invert(Fraction fraction) {
 
     }
 
-    public Fraction divide(Fraction fraction){
-
+    public boolean equals(Fraction fraction) {
+        return (this.numerator == fraction.numerator &&
+                this.denominator == fraction.denominator);
     }
 
-    public Fraction invert(Fraction fraction){
-
+    public boolean isInteger() {
+        return ((this.numerator % this.denominator) == 0);
     }
 
-    public boolean equals(Fraction fraction){
-
+    public boolean hasFiniteDecimalExpansion() {
+        return (this.denominator % 2 == 0 || this.denominator % 5 == 0);
     }
 
-    public boolean isInteger(){
-
+    public double doubleValue() {
+        return this.numerator / this.denominator;
     }
 
-    public boolean
+    public String toString() {
+        return "a";
+    }
+
 }
