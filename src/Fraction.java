@@ -53,7 +53,8 @@ public class Fraction {
     }
 
     public boolean hasFiniteDecimalExpansion() {
-        return (this.denominator % 2 == 0 || this.denominator % 5 == 0);
+        return (this.denominator % 2 == 0 ||
+                this.denominator % 5 == 0);
     }
 
     public double doubleValue() {
