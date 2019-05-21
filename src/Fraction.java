@@ -20,11 +20,11 @@ public class Fraction {
 
     //METODY
     public Fraction add(Fraction fraction) {
-
+return this;
     }
 
     public Fraction subtract(Fraction fraction) {
-
+        return this;
     }
 
     public Fraction multiply(Fraction fraction) {
@@ -40,7 +40,7 @@ public class Fraction {
     }
 
     public Fraction invert(Fraction fraction) {
-
+        return this;
     }
 
     public boolean equals(Fraction fraction) {

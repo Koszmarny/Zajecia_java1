@@ -12,12 +12,11 @@ public class Polynomial {
     //KONSTRUKTORY
     public Polynomial(double[] coefficients) {
         this.coefficients = Arrays.copyOf(coefficients, coefficients.length);
-        this.degree = coefficients.length;
+        this.degree = coefficients.length - 1;
     }
 
     public Polynomial(Polynomial polynomial) {
-        coefficients = Arrays.copyOf(polynomial.coefficients, polynomial.degree);
-        degree = polynomial.degree;
+        this(polynomial.coefficients);
     }
 
     public Polynomial() {
@@ -30,63 +29,75 @@ public class Polynomial {
         } else return polynomial;
     }
 
+    private Polynomial longer(Polynomial polynomial) {
+        if (this.degree > polynomial.degree) {
+            return this;
+        } else return polynomial;
+    }
+
     public Polynomial createNormedMonomial(int degree) {
         return this;
     }
 
     public Polynomial add(Polynomial polynomial) {
-        for (int i = this.shorter(polynomial).degree; i > 0; i++) {
-            this.coefficients[i] += polynomial.coefficients[i];
+        double[] coefficients = new double[this.longer(polynomial).degree+1];
+        for (int i = 0; i <= (this.shorter(polynomial).degree); i++) {
+            coefficients[i] = this.coefficients[i] + polynomial.coefficients[i];
         }
-        return this;
+        for (int i = (this.shorter(polynomial).degree) + 1; i <= (this.longer(polynomial).degree); i++) {
+            coefficients[i] = this.longer(polynomial).coefficients[i];
+        }
+        return new Polynomial(coefficients);
     }
 
     public Polynomial subtract(Polynomial polynomial) {
-        for (int i = this.shorter(polynomial).degree; i > 0; i++) {
-            this.coefficients[i] -= polynomial.coefficients[i];
-        }
-        return this;
+        final Polynomial MINUS_ONE = new Polynomial(new double[] {-1});
+        return this.add(polynomial.multiply(MINUS_ONE));
     }
 
     public Polynomial multiply(Polynomial polynomial) {
-        for (int i = this.shorter(polynomial).degree; i > 0; i++) {
-            this.coefficients[i] *= polynomial.coefficients[i];
+        double[] coefficients = new double[this.longer(polynomial).degree + 1];
+        for (int i = 0; i <= (this.shorter(polynomial).degree); i++) {
+            coefficients[i] = this.coefficients[i] * polynomial.coefficients[i];
         }
-        return this;
+        for (int i = (this.shorter(polynomial).degree+1); i <= (this.longer(polynomial).degree); i++) {
+            coefficients[i] = this.longer(polynomial).coefficients[i];
+        }
+        return new Polynomial(coefficients);
     }
 
     public Polynomial divide(Polynomial polynomial) {
+        Polynomial po = new Polynomial();
         for (int i = this.shorter(polynomial).degree; i > 0; i++) {
-            this.coefficients[i] /= polynomial.coefficients[i];
+            po.coefficients[i] = this.coefficients[i] / polynomial.coefficients[i];
         }
-        return this;
+        return po;
     }
 
     public Polynomial mod(Polynomial polynomial) {
+        Polynomial po = new Polynomial();
         for (int i = this.shorter(polynomial).degree; i > 0; i++) {
-            this.coefficients[i] %= polynomial.coefficients[i];
+            po.coefficients[i] = this.coefficients[i] % polynomial.coefficients[i];
         }
         return this;
     }
 
     public Polynomial getDerivative() {
-        Polynomial pol = new Polynomial();
+        Polynomial po = new Polynomial();
         int degree = this.degree - 1;
         for (int i = 0; i < this.degree; i++) {
-            pol.coefficients[i] = degree * this.coefficients[i];
+            po.coefficients[i] = degree * this.coefficients[i];
             degree--;
         }
-        return pol;
+        return po;
     }
 
     public double valueAt(double x) {
-        int degree = this.degree;
-        double result = 0;
-        for (int i = 0; i < this.degree; i++) {
-            result += Math.pow(this.coefficients[i] * x, degree);
-            degree--;
+        double wynik = 0;
+        for (int i = this.degree; i >= 0; i--) {
+            wynik = wynik * x + this.coefficients[i];
         }
-        return result;
+        return wynik;
     }
 
     public boolean isZeroPolynomial() {

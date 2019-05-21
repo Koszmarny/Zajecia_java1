@@ -48,6 +48,6 @@ public final class QuadraticPolynomial extends Polynomial {
     }
 
     public boolean isEvenFunction() {
-
+return true;
     }
 }
