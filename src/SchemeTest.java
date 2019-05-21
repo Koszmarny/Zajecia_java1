@@ -13,6 +13,7 @@ public class SchemeTest {
         System.out.println(po2);
         System.out.println(po.add(po2));
         System.out.println(po2.subtract(po));
-        //System.out.println(po.);
+        System.out.println(po.multiply(po2));
+        System.out.println(po.getDerivative());
     }
 }

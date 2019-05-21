@@ -29,7 +29,7 @@ public class Polynomial {
         } else return polynomial;
     }
 
-    private Polynomial longer(Polynomial polynomial) {
+    private Polynomial longer(Polynomial polynomial) {              // zwraca wielomian WIEKSZEGO stopnia
         if (this.degree > polynomial.degree) {
             return this;
         } else return polynomial;
@@ -51,8 +51,14 @@ public class Polynomial {
     }
 
     public Polynomial subtract(Polynomial polynomial) {
-        final Polynomial MINUS_ONE = new Polynomial(new double[] {-1});
-        return this.add(polynomial.multiply(MINUS_ONE));
+        double[] coefficients = new double[this.longer(polynomial).degree+1];
+        for (int i = 0; i <= (this.shorter(polynomial).degree); i++) {
+            coefficients[i] = this.coefficients[i] - polynomial.coefficients[i];
+        }
+        for (int i = (this.shorter(polynomial).degree) + 1; i <= (this.longer(polynomial).degree); i++) {
+            coefficients[i] = this.longer(polynomial).coefficients[i]*-1;
+        }
+        return new Polynomial(coefficients);
     }
 
     public Polynomial multiply(Polynomial polynomial) {
