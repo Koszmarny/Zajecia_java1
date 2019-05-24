@@ -106,7 +106,7 @@ public class SimpleCalculations {
         } else if (x > 2) {
             return x + 3;
         } else if (x <= 2) {
-            return x * x -2;
+            return x * x - 2;
         } else {
             return 0;
         }
@@ -171,11 +171,35 @@ public class SimpleCalculations {
      * @param C
      * @return
      */
-    /*
+
     public static int[] quadrants(double A, double B, double C) {
-        int x
+        int tab[] = new int[]{};
+        if (A > 0) {
+            if (C > 0) {
+                tab = new int[]{1, 2, 3};
+            } else if (C == 0) {
+                tab = new int[]{1, 2};
+            } else if (C < 0) {
+                tab = new int[]{1, 3, 4};
+            }
+        } else if (A < 0) {
+            if (C > 0) {
+                tab = new int[]{1, 2, 4};
+            } else if (C == 0) {
+                tab = new int[]{2, 4};
+            } else if (C < 0) {
+                tab = new int[]{2, 3, 4};
+            }
+        } else if (A == 0) {
+            if (C > 0) {
+                tab = new int[]{1, 2};
+            } else if (C < 0) {
+                tab = new int[]{3, 4};
+            }
+        }
+        return tab;
     }
-*/
+
 
     /**
      * zad 11
@@ -215,17 +239,18 @@ public class SimpleCalculations {
      */
     public static double[] solveQuadraticEquation(double a, double b, double c) {
         double delta;
-        double x1 = 0, x2 = 0;
-        double[] Array = new double[2];
+        double[] Array = new double[3];
         delta = b * b - 4 * a * c;
         if (delta > 0) {
-            x1 = (-b + Math.sqrt(delta)) / 2 * a;
-            x2 = (-b - Math.sqrt(delta)) / 2 * a;
+            Array[0] = (-b + Math.sqrt(delta)) / 2 * a;
+            Array[1] = (-b - Math.sqrt(delta)) / 2 * a;
         } else if (delta == 0) {
-            x1 = (-b / 2 * a);
+            Array[0] = (-b / 2 * a);
+        } else if (a == 0 && b == 0 && c == 0) {
+            Array[0] = 0;
+            Array[1] = 0;
+            Array[2] = 0;
         }
-        Array[0] = x1;
-        Array[1] = x2;
         return Array;
     }
 
@@ -237,13 +262,15 @@ public class SimpleCalculations {
      * @return liczba fibonacciego
      */
     public static long fibonacci(int number) {
-        if (number >= 3) {
-            return fibonacci(number - 1) + fibonacci(number - 2);
-        } else if (number == 0) {
-            return 0;
-        } else {
-            return 1;
+        long wynik = 0;
+        if (number == 0) {
+            wynik = 0;
+        } else if (number == 1 || number == 2) {
+            wynik = 1;
+        } else if (number >= 3 && number < 93) {
+            wynik = fibonacci(number - 1) + fibonacci(number - 2);
         }
+        return wynik;
     }
 
     /**
@@ -254,11 +281,13 @@ public class SimpleCalculations {
      * @return silnia
      */
     public static long factorial(int number) {
-        if (number >= 2) {
-            return number * factorial(number - 1);
-        } else {
-            return number;
+        long wynik = 0;
+        if (number >= 1 && number < 21) {
+            wynik = number * factorial(number - 1);
+        } else if (number == 0) {
+            wynik = 1;
         }
+        return wynik;
     }
 
     /**
@@ -269,8 +298,8 @@ public class SimpleCalculations {
      * @param finish liczba koncowa
      * @return iloczyn
      */
-    public static int product(int start, int finish) {
-        int prod = 1;
+    public static long product(int start, int finish) {
+        long prod = 1;
         for (int i = start; i <= finish; i++) {
             prod = prod * i;
         }
@@ -288,7 +317,7 @@ public class SimpleCalculations {
     public static long sum(int start, int finish) {
         long sum = 0;
         for (int i = start; i <= finish; i++) {
-            sum = sum + i;
+            sum += i;
         }
         return sum;
     }
@@ -329,11 +358,15 @@ public class SimpleCalculations {
      * @return potega
      */
     public static double power(double base, int index) {
+        double wynik = 1;
         if (base == 0 && index == 0) {
-            return Double.NaN;
+            wynik = Double.NaN;
         } else {
-            return (Math.pow(base, index));
+            for (int i = 1; i <= index; i++) {
+                wynik *= base;
+            }
         }
+        return wynik;
     }
 
     /**

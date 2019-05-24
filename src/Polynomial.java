@@ -40,7 +40,7 @@ public class Polynomial {
     }
 
     public Polynomial add(Polynomial polynomial) {
-        double[] coefficients = new double[this.longer(polynomial).degree+1];
+        double[] coefficients = new double[this.longer(polynomial).degree + 1];
         for (int i = 0; i <= (this.shorter(polynomial).degree); i++) {
             coefficients[i] = this.coefficients[i] + polynomial.coefficients[i];
         }
@@ -51,12 +51,12 @@ public class Polynomial {
     }
 
     public Polynomial subtract(Polynomial polynomial) {
-        double[] coefficients = new double[this.longer(polynomial).degree+1];
+        double[] coefficients = new double[this.longer(polynomial).degree + 1];
         for (int i = 0; i <= (this.shorter(polynomial).degree); i++) {
             coefficients[i] = this.coefficients[i] - polynomial.coefficients[i];
         }
         for (int i = (this.shorter(polynomial).degree) + 1; i <= (this.longer(polynomial).degree); i++) {
-            coefficients[i] = this.longer(polynomial).coefficients[i]*-1;
+            coefficients[i] = this.longer(polynomial).coefficients[i] * -1;
         }
         return new Polynomial(coefficients);
     }
@@ -66,7 +66,7 @@ public class Polynomial {
         for (int i = 0; i <= (this.shorter(polynomial).degree); i++) {
             coefficients[i] = this.coefficients[i] * polynomial.coefficients[i];
         }
-        for (int i = (this.shorter(polynomial).degree+1); i <= (this.longer(polynomial).degree); i++) {
+        for (int i = (this.shorter(polynomial).degree + 1); i <= (this.longer(polynomial).degree); i++) {
             coefficients[i] = this.longer(polynomial).coefficients[i];
         }
         return new Polynomial(coefficients);
@@ -89,13 +89,11 @@ public class Polynomial {
     }
 
     public Polynomial getDerivative() {
-        Polynomial po = new Polynomial();
-        int degree = this.degree - 1;
-        for (int i = 0; i < this.degree; i++) {
-            po.coefficients[i] = degree * this.coefficients[i];
-            degree--;
+        double[] coefficients = new double[this.degree];
+        for (int i = this.degree ; i > 0; i--) {
+            coefficients[i-1] = i * this.coefficients[i];
         }
-        return po;
+        return new Polynomial(coefficients);
     }
 
     public double valueAt(double x) {
